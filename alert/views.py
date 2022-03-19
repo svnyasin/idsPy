@@ -1,22 +1,17 @@
 
-from django.shortcuts import render
+from django.shortcuts import redirect, render,get_object_or_404
 import threading
+import alert
 import alert.sniffer as sniffer
 import csv
 
 from alert.models import CapturedPackets
+from .models import CapturedPackets
 
 # Create your views here.
 
 
 def startSniffing():
-    #database_connect = sqlite3.connect("db.sqlite3")
-    #cursor = database_connect.cursor()
-    #cursor.execute("INSERT INTO alert_capturedpackets (p_content) VALUES ('asd')")
-
-    #x = CapturedPackets()
-    #x.p_content = 'This is the content'
-    # x.save()
     reader = csv.reader(open('alert/rules.csv', mode='r'))
     rules = list(reader)
 
@@ -24,6 +19,7 @@ def startSniffing():
         for i in range(len(rules)):
             if rules[i][0] in str(p).lower():
                 x = CapturedPackets()
+                x.title = rules[i][1]
                 x.p_content = str(p)
                 x.save()
                 #print(rules[i][1])
@@ -47,4 +43,13 @@ t1.start()
 
 
 def index(request):
-    return render(request, "index.html")
+
+    cap_packs = CapturedPackets.objects.all()
+
+    return render(request, "index.html", {"cap_packs":cap_packs})
+
+def delete(request,id):
+    packet = get_object_or_404(CapturedPackets,id = id)
+
+    packet.delete()
+    return redirect("/")
