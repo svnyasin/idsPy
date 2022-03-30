@@ -1,68 +1,158 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="refresh" content="30">
+    <!-- <meta http-equiv="refresh" content="30"> -->
+    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    
     <title>idsPy</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
+
+    <style>
+      *, ::after, ::before {
+        box-sizing: unset
+      }
+    </style>
+    
 </head>
 <body>
-    <div class="container">
-        <h3 style="margin-top: 150px;">Alert List</h3>
-        <hr>
-
-        {% if cap_packs %}
-        
-        <table class="table table-striped table-bordered">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Title</th>
-                <th scope="col">Content</th>
-                <th scope="col"></th>
-
-              </tr>
-            </thead>
-            <tbody>
-
-                {% for cap_packs in cap_packs %}
-                <tr>
-                    <th scope="row">{{cap_packs.id}}</th>
-                    <td>{{cap_packs.title}}</td>
-                    <td><div style="overflow:scroll; width:100%; height:100px">{{cap_packs.p_content}}</div></td>
-                    <td><a href="/delete/{{cap_packs.id}}" class = "btn btn-danger">Sil</a></td>
-                  </tr>
-                
-                {% endfor %}
-
-
-              <!--<tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>-->
-              
-            </tbody>
-          </table>
-        
-        
-        {% else %}
-        
-        <div class="alert alert-danger">
-            Yakalanmış paket yok... 
-
-
-        </div>
-        
-        {% endif %}
-
-        
-        
-    </div>
     
+  <div class="kenarCubugu">
+    <div class="yanBaslik">
+      <a href="#"><img src="{% static 'images/logo.png' %}" alt="" /></a>        
+    </div>
+    <div class="kullanici">
+      <img src="{% static 'images/kullanici.png' %}" />
+      <div class="bilgi">
+        <span class="isim">Yasin Seven</span>
+        <span class="unvan">Siber Güvenlik Mimarı</span>
+      </div>
+    </div>
+    <a href="index.php" class="kontrolPaneli">
+      <span>Alarmlar</span>
+      <i class="fas fa-home"></i>
+    </a>
+    <a href="konumlar.php" class="konumlar">
+      <span>Konumlar</span>
+      <i class="fas fa-map-marker-alt"></i>
+    </a>
+    
+    
+    
+  </div>
+  <div class="icerik">
+    <div class="baslik">
+      <i class="fas fa-bars"></i>
+      <div class="arama">
+        <i class="fas fa-search"></i>
+        <input type="text" placeholder="Arama..." />
+      </div>
+      <div class="kullanici">
+        <img src="{% static 'images/kullanici.png' %}" />
+        <span>Yasin Seven</span>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div class="bildirim">
+        <div class="baslikMektup">
+          <i class="far fa-envelope"></i>
+          <i class="fas fa-circle"></i>
+        </div>
+        <div class="baslikCan">
+          <i class="far fa-bell"></i>
+          <i class="fas fa-circle"></i>
+        </div>
+        <div class="baslikBayrak">
+          <i class="far fa-flag"></i>
+          <i class="fas fa-circle"></i>
+        </div>
+      </div>
+      <a href="logout.php" class="logOut"><i class="fas fa-sign-out-alt"></i></a>
+    </div>
+    <div class="anaEkran">
+      <div class="ust">
+        <div class="sol">
+          <span>Alarmlar</span>
+          <i class="fas fa-home"></i>
+        </div>
+        <div class="sag">
+          <i class="fas fa-tachometer-alt"></i>
+          <span>idsPy</span>
+          <span>></span>
+          <span>Alarmlar</span>
+        </div>
+      </div>
+      <div class="kutular1">
+        <div class="container">
+          <hr>
+      
+          {% if cap_packs %}
+          
+          <table class="table table-striped table-bordered">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Title</th>
+                  <th scope="col">Content</th>
+                  <th scope="col"></th>
+      
+                </tr>
+              </thead>
+              <tbody>
+      
+                  {% for cap_packs in cap_packs %}
+                  <tr>
+                      <th scope="row">{{cap_packs.id}}</th>
+                      <td>{{cap_packs.title}}</td>
+                      <td><div style="overflow:scroll; width:100%; height:100px">{{cap_packs.p_content}}</div></td>
+                      <td><a href="/delete/{{cap_packs.id}}" class = "btn btn-danger">Sil</a></td>
+                    </tr>
+                  
+                  {% endfor %}
+      
+      
+                <!--<tr>
+                  <th scope="row">1</th>
+                  <td>Mark</td>
+                  <td>Otto</td>
+                  <td>@mdo</td>
+                </tr>-->
+                
+              </tbody>
+            </table>
+          
+          
+          {% else %}
+          
+          <div class="alert alert-danger">
+              Yakalanmış paket yok... 
+      
+      
+          </div>
+          
+          {% endif %}
+      
+          
+          
+      </div>
+      </div>
+      
+      
+      
+    <div class="footer">
+      <div class="sol">
+        <span>Site Haritası</span>
+        <span>Hakkımızda</span>
+        <span>Geri Bildirim</span>
+        <span>İhaleler</span>
+        <span>İletişim - Ulaşım</span></div>
+      <span class="copyright">2020 Copyright © Tüm hakları saklıdır. - Yasin Seven</span>
+    </div>
+  </div>
     
 
 
