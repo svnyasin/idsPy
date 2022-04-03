@@ -19,6 +19,11 @@ from alert import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    
     path('', views.index),
+    path('alerts', views.alerts),
+    path('archive', views.archive),
+
+
     path('delete/<int:id>', views.delete),
 ]
